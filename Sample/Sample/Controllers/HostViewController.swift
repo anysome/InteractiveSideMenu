@@ -30,6 +30,10 @@ class HostViewController: MenuContainerViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
+    
+    override var screenEdgeGestureEnable: Bool {
+        return false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

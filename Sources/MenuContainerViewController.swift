@@ -26,6 +26,10 @@ open class MenuContainerViewController: UIViewController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return currentContentViewController?.preferredStatusBarStyle ?? .lightContent
     }
+    
+    open var screenEdgeGestureEnable: Bool {
+        return true
+    }
 
     fileprivate weak var currentContentViewController: UIViewController?
     fileprivate var navigationMenuTransitionDelegate: MenuTransitioningDelegate!
@@ -91,11 +95,11 @@ open class MenuContainerViewController: UIViewController {
 
         navigationMenuTransitionDelegate = MenuTransitioningDelegate(interactiveTransition: interactiveTransition)
 
+        guard screenEdgeGestureEnable else { return }
         let screenEdgePanRecognizer = UIScreenEdgePanGestureRecognizer(
             target: navigationMenuTransitionDelegate.interactiveTransition,
             action: #selector(MenuInteractiveTransition.handlePanPresentation(recognizer:))
         )
-
         screenEdgePanRecognizer.edges = .left
         view.addGestureRecognizer(screenEdgePanRecognizer)
     }
